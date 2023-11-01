@@ -1,11 +1,8 @@
 import os
-from re import S
 import zipfile
 import gdown
-import cv2
 import numpy as np
 import pandas as pd 
-
 
 PRODUCT_CLASSIFICATION_TRAIN_URL = "https://drive.google.com/u/0/uc?id=1O4YR4UBatOLnaP4gMHbmFw7UJvhhxFwq&export=download"
 PRODUCT_CLASSIFICATION_TEST_URL = "https://drive.google.com/u/0/uc?id=1-7aMdKW4KcCKLwoUKC3XxdIwfIKkzwx6&export=download"
@@ -35,11 +32,14 @@ def fetch_data(url, path, output):
     
     # unzip data
     if output.endswith(".zip"):
-        with zipfile.ZipFile(file_path, 'r') as zip_ref:
+        with zipfile.ZipFile(file_path) as zip_ref:
             zip_ref.extractall(path)
+            original_name = zip_ref.namelist()[0]
+            zip_ref.close()
     
         # remove zip file
         os.remove(file_path)   
+        os.rename(os.path.join(path, original_name), file_path.replace('.zip', ''))
     
 def fetch_product_classification_data():
     """
