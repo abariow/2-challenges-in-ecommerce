@@ -5,7 +5,6 @@ import gdown
 import cv2
 import numpy as np
 import pandas as pd 
-from tensorflow import keras
 
 
 PRODUCT_CLASSIFICATION_TRAIN_URL = "https://drive.google.com/u/0/uc?id=1O4YR4UBatOLnaP4gMHbmFw7UJvhhxFwq&export=download"
