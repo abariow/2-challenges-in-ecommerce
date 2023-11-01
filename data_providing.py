@@ -1,9 +1,11 @@
 import os
+from re import S
 import zipfile
 import gdown
 import cv2
 import numpy as np
 import pandas as pd 
+
 
 PRODUCT_CLASSIFICATION_TRAIN_URL = "https://drive.google.com/u/0/uc?id=1O4YR4UBatOLnaP4gMHbmFw7UJvhhxFwq&export=download"
 PRODUCT_CLASSIFICATION_TEST_URL = "https://drive.google.com/u/0/uc?id=1-7aMdKW4KcCKLwoUKC3XxdIwfIKkzwx6&export=download"
@@ -42,17 +44,25 @@ def fetch_data(url, path, output):
 def fetch_product_classification_data():
     """
     Fetch product classification data
+    return: path to where data is stored
     """
-    fetch_data(PRODUCT_CLASSIFICATION_TRAIN_URL, PRODUCT_CLASSIFICATION_DATA_PATH, "train_data.zip")
-    fetch_data(PRODUCT_CLASSIFICATION_TEST_URL, PRODUCT_CLASSIFICATION_DATA_PATH, "test_data.zip")
+    fetch_data(PRODUCT_CLASSIFICATION_TRAIN_URL, PRODUCT_CLASSIFICATION_DATA_PATH, "train.zip")
+    fetch_data(
+        PRODUCT_CLASSIFICATION_TEST_URL, 
+        os.path.join(PRODUCT_CLASSIFICATION_DATA_PATH, 'test'), "nonlabels.zip")
+    
+    return PRODUCT_CLASSIFICATION_DATA_PATH
     
 def fetch_sentiment_analysis_data():
     """
     Fetch sentiment analysis data
+    return: path to where data is stored
     """
     fetch_data(SENTIMENT_ANAYLSIS_TRAIN_URL, SENTIMENT_ANALYSIS_DATA_PATH, "train_data.csv")
     fetch_data(SENTIMENT_ANAYLSIS_TEST_URL, SENTIMENT_ANALYSIS_DATA_PATH, "test_data.csv")
     fetch_data(SENTIMENT_ANALYSIS_TITLE_BRAND_URL, SENTIMENT_ANALYSIS_DATA_PATH, "title_brand.csv")
+    
+    return SENTIMENT_ANALYSIS_DATA_PATH
     
 def fetch_all_data():
     """
@@ -68,8 +78,8 @@ def load_sentiment_analysis_data() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataF
     return: train_data, test_data, title_brand_data as pandas dataframe
     """
     fetch_sentiment_analysis_data()
-    train_data_path = os.path.join(SENTIMENT_ANALYSIS_DATA_PATH, "train_data.csv")
-    test_data_path = os.path.join(SENTIMENT_ANALYSIS_DATA_PATH, "test_data.csv")
+    train_data_path = os.path.join(SENTIMENT_ANALYSIS_DATA_PATH, "train.csv")
+    test_data_path = os.path.join(SENTIMENT_ANALYSIS_DATA_PATH, "test.csv")
     title_brand_data_path = os.path.join(SENTIMENT_ANALYSIS_DATA_PATH, "title_brand.csv")
     
     # Load data
@@ -80,33 +90,8 @@ def load_sentiment_analysis_data() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataF
     return train_data, test_data, title_brand_data
 
 
-def load_product_classification_data() -> tuple[dict[str, list], dict[str, list]]:
-    """
-    Load product classification data
-    
-    return: train_data, test_data as dictionary[images, labels], dictionary[images, file_names]
-    """
-    fetch_product_classification_data()
-    train_data_path = os.path.join(PRODUCT_CLASSIFICATION_DATA_PATH, "train_data")
-    test_data_path = os.path.join(PRODUCT_CLASSIFICATION_DATA_PATH, "test_data")
-    
-    train_data = {'images': [], 'labels': []}
-    test_data = {'images': [], 'file_names': []}
-    
-    # Load train data
-    print("Loading train data...")
-    for dir_name in os.listdir(train_data_path):
-        for file_name in os.listdir(os.path.join(train_data_path, dir_name)):
-            train_data['images'].append(cv2.imread(os.path.join(train_data_path, dir_name, file_name)))
-            train_data['labels'].append(dir_name)
-    
-    # Load test data
-    print("Loading test data...")
-    for file_name in os.listdir(test_data_path):
-        test_data['images'].append(cv2.imread(os.path.join(test_data_path, file_name)))
-        test_data['file_names'].append(file_name)
-            
-    return train_data, test_data
+def load_product_classification_data():
+    return fetch_product_classification_data()
 
 if __name__ == "__main__":
     fetch_all_data()
