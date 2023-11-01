@@ -1,6 +1,9 @@
 ### To save space for uploading and downloading csv files
 *.csv
 
+# Ignore data directory
+data/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
