@@ -58,8 +58,8 @@ def fetch_sentiment_analysis_data():
     Fetch sentiment analysis data
     return: path to where data is stored
     """
-    fetch_data(SENTIMENT_ANAYLSIS_TRAIN_URL, SENTIMENT_ANALYSIS_DATA_PATH, "train_data.csv")
-    fetch_data(SENTIMENT_ANAYLSIS_TEST_URL, SENTIMENT_ANALYSIS_DATA_PATH, "test_data.csv")
+    fetch_data(SENTIMENT_ANAYLSIS_TRAIN_URL, SENTIMENT_ANALYSIS_DATA_PATH, "train.csv")
+    fetch_data(SENTIMENT_ANAYLSIS_TEST_URL, SENTIMENT_ANALYSIS_DATA_PATH, "test.csv")
     fetch_data(SENTIMENT_ANALYSIS_TITLE_BRAND_URL, SENTIMENT_ANALYSIS_DATA_PATH, "title_brand.csv")
     
     return SENTIMENT_ANALYSIS_DATA_PATH
