@@ -1,15 +1,9 @@
 import streamlit as st
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
-import plotly.io as pio
-import plotly.graph_objects as go
 import io
 import os
-from wordcloud import WordCloud
-from nltk.corpus import stopwords
-import nltk
 
 #################################################
 
@@ -32,6 +26,59 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+
+############################################################  Q1 Start ############################################################
+
+st.markdown("<hr/>", unsafe_allow_html=True)
+st.markdown(
+    '<div style="text-align: center; font-size: 25px; margin-bottom:30px">Question 1</div>',
+    unsafe_allow_html=True,
+)
+st.markdown(
+    '<div style=" direction: rtl; text-align: right; font-size: 25px; margin-bottom:30px"> نمایش چند نمونه تصادفی از مجموعه داده </div>',
+    unsafe_allow_html=True,
+)
+st.image('./dashboard-data/Q1-1.png')
+
+st.markdown(
+    '<div style=" direction: rtl; text-align: right; font-size: 20px; margin-bottom:30px">  در این قسمت از هر دسته بندی اینجا ۶ مورد نمایش داده شده است. </div>',
+    unsafe_allow_html=True,
+)
+
+Q1_text1 = '''
+<div style="text-align: right; font-size: 20px; margin-bottom: 30px">
+
+**: مجموعه داده**
+
+داده های مربوط به تصاویر محصولات در ۱۰ کتگوری دسته بندی می‌شوند. 
+اما با این حال، محصولات هر کتگوری، از لحاظ ظاهری چندان بهم شباهتی ندارند. 
+برای مثال در دسته محصولات ورزشی هم کرنومتر پیدا می‌شود، هم پیراهن ورزشی و هم عینک شنا. 
+بنابراین مسئله ما، بر خلاف آنچه ساختار دیتا (فقط ۱۰ کلاس) به ما نشان می‌دهد، مسئله دشواری است.
+
+در این مسئله، داده های را با استفاده از کلاس image data generator در کتابخانه کراس،‌ در هر بار دور آموزش،‌ اندکی تغییر می دهیم، برای مثال،‌ تصاویر را کمی به سمت راست یا چپ شیفت میدهیم، آنها را دوران می دهیم و .. . تا شبکه مان داده های متنوع تری را در حین آموزش ببیند و قدرت تعمیم آن افزایش یابد(از بیش برازش جلوگیری شود). 
+
+**: طراحی شبکه**
+
+برای حل این مسئله به سراغ شبکه های عصبی عمیق می رویم. رویکر ما این است به سراغ شبکه کانولوشنی های از پیش آموزش داده شده برویم و در واقع از انتقال یادگیری (transfer learning) استفاده کنیم. برای این کار ابتدا یک شبکه از پیش آموزش داده شده، برای مثال VGG16،‌ را انتخاب می کنیم ولایه های کانولوشنوی آن را، با وزن های آموزش داده شده روی مجموعه داده imagenet،  به عنوان مدل پایه خود قرار می دهیم. سپس در انتهای این شبکه کانولوشنی، چند لایه اضافه می کنیم و آن را مخصوصا برای مسئله خودمان آماده می کنیم. این لایه های به ترتیب عبارتند از یک لایه GlobalAveragePooling2D،‌ یک(یا چند) لایه Dense و در نهایت یک لایه به عنوان لایه خروجی به تعداد ۱۰ نرون. حال این شبکه آماده است تا روی داده هایمان آموزش داده شود.
+
+**: آموزش شبکه**
+
+<p>
+آموزش شبکه
+برای آموزش شبکه مان، وزن های لایه های  شبکه مان،‌ به غیر از چند لایه آخر شبکه،‌ را در طول فرآیند یادگیری، ثابت نگه میداریم و یا اصطلاحا freeze می کنم اما اجازه می دهیم وزن های  چند لایه آخر شبکه بروزرسانی شوند یا اصطلاحا finetune شوند.
+</p>
+
+<p>
+</p>
+
+</div>
+'''
+
+st.markdown(Q1_text1, unsafe_allow_html=True)
+
+
+############################################################  Q1 End ############################################################
+
 ############################################################  Q2 Start ############################################################
 
 st.markdown("<hr/>", unsafe_allow_html=True)
@@ -40,7 +87,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 st.markdown(
-    '<div style="text-align: center; font-size: 15px; margin-bottom:30px">We are represented with three csv files. Lets explore them and make any necessary changes.</div>',
+    '<div style="text-align: center; font-size: 15px; margin-bottom:30px">These are all csv files related to Question 2 in our project. Lets explore coressponding files and make necessary changes.</div>',
     unsafe_allow_html=True,
 )
 
@@ -415,4 +462,4 @@ st.dataframe(top_10_reviews)
 
 st.markdown("<hr/>", unsafe_allow_html=True)
 
-############################################################  Q1 End ############################################################
+############################################################  Q2 End ############################################################
