@@ -41,9 +41,18 @@ st.markdown(
 st.image('./dashboard-data/Q1-1.png')
 
 st.markdown(
-    '<div style=" direction: rtl; text-align: right; font-size: 20px; margin-bottom:30px">  در این قسمت از هر دسته بندی اینجا ۶ مورد نمایش داده شده است. </div>',
+    '<div style=" direction: rtl; text-align: right; font-size: 20px; margin-bottom:30px">  در عکس بالا از هر دسته بندی ۶ مورد نمایش داده شده است. </div>',
     unsafe_allow_html=True,
 )
+
+st.divider()
+
+
+st.markdown(
+    '<div style=" direction: rtl; text-align: right; font-size: 20px; margin-bottom:30px"> و اما در عکس ذیل چند مورد از پیش بینی های مدل و لیبل صحیح مربوطه ی آن آورده شده است . </div>',
+    unsafe_allow_html=True,
+)
+st.image('./dashboard-data/Q1-2.png')
 
 Q1_text1 = '''
 <div style="text-align: right; font-size: 20px; margin-bottom: 30px">
