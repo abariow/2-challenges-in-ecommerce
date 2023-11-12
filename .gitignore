@@ -1,3 +1,6 @@
+### To save space for uploading and downloading csv files
+*.csv
+
 # Ignore data directory
 data/
 
