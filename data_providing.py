@@ -4,8 +4,8 @@ import gdown
 import numpy as np
 import pandas as pd 
 
-PRODUCT_CLASSIFICATION_TRAIN_URL = "https://drive.google.com/u/0/uc?id=1O4YR4UBatOLnaP4gMHbmFw7UJvhhxFwq&export=download"
-PRODUCT_CLASSIFICATION_TEST_URL = "https://drive.google.com/u/0/uc?id=1-7aMdKW4KcCKLwoUKC3XxdIwfIKkzwx6&export=download"
+PRODUCT_CLASSIFICATION_TRAIN_URL = "https://drive.google.com/u/0/uc?id=1-7ljOXuzdIeXTCRuxZFGH2Sg3IanH-WJ&export=download"
+PRODUCT_CLASSIFICATION_TEST_URL = "https://drive.google.com/u/0/uc?id=1-5xCKnZ7N7X6m0pBV1yZDoTmJjAQpttF&export=download"
 SENTIMENT_ANAYLSIS_TRAIN_URL = "https://drive.google.com/u/0/uc?id=1-AlW7oNJHaqi3xk_9dWHUS52Dzl_FmFW&export=download"
 SENTIMENT_ANAYLSIS_TEST_URL = "https://drive.google.com/u/0/uc?id=1-8TsrqTRFP-q9TM-6HinhO0ZVXFHq9TB&export=download"
 SENTIMENT_ANALYSIS_TITLE_BRAND_URL = "https://drive.google.com/u/0/uc?id=1I9aPAvvYgQWdHGKtnd7IeTGXpx8vOm4h&export=download"
@@ -71,7 +71,7 @@ def fetch_all_data():
     fetch_product_classification_data()
     fetch_sentiment_analysis_data()
     
-def load_sentiment_analysis_data() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def load_sentiment_analysis_data():
     """
     Load sentiment analysis data
     
